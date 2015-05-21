@@ -25,7 +25,8 @@ __all__ = ['is_chordal',
 class NetworkXTreewidthBoundExceeded(nx.NetworkXException):
     """Exception raised when a treewidth bound has been provided and it has 
     been exceeded"""
-    
+
+
 def is_chordal(G):
     """Checks whether G is a chordal graph.
 
