@@ -26,7 +26,8 @@ __all__ = ['chords', 'cycle_basis', 'cycle_basis_matrix', 'find_cycle',
 __author__ = "\n".join(['Jon Olav Vik <jonovik@gmail.com>',
                         'Dan Schult <dschult@colgate.edu>',
                         'Aric Hagberg <hagberg@lanl.gov>',
-                        'JuanPi Carbajal <ajuanpi+dev@gmail.com>'])
+                        'JuanPi Carbajal <ajuanpi+dev@gmail.com>',
+                        'Jeffrey Finkelstein <jeffrey.finkelstein@gmail.com>'])
 
 
 @not_implemented_for('directed')
