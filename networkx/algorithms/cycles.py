@@ -133,12 +133,11 @@ def cycle_basis(G, root=None):
     return cycles
 
 
-# TODO What does "oriented" mean in the documentation? Need to define it.
 @not_implemented_for('directed')
 def cycle_basis_matrix(G, T=None):
     """Returns the matrix describing the fundamental cycles in ``G``.
 
-    If ``G`` is not oriented, an arbitrary orientation is selected.
+    If ``G`` is not a directed graph, an arbitrary orientation of the edges is selected.
 
     Parameters
     ----------
@@ -148,7 +147,7 @@ def cycle_basis_matrix(G, T=None):
     T : NetworkX graph
         A spanning tree for the graph ``G``. If this argument is not ``None``,
         the cycle basis whose matrix will be returned will be the set of
-        `fundamental cycles`_ of the tree ``T``. If this is not specified, an
+        `fundamental cycles`_ with respect to the tree ``T``. If this is not specified, an
         arbitrary minimum spanning tree will be used.
 
     .. _fundamental cycles: https://en.wikipedia.org/wiki/Spanning_tree#Fundamental_cycles
