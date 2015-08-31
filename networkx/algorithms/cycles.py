@@ -31,7 +31,7 @@ __author__ = "\n".join(['Jon Olav Vik <jonovik@gmail.com>',
 
 
 @not_implemented_for('directed')
-def cycle_basis(G, root=None):
+def cycle_basis(G, root=None, T=None):
     """Returns a list of cycles that form a basis for the cycle space of
     ``G``.
 
@@ -55,6 +55,11 @@ def cycle_basis(G, root=None):
 
     root : node, optional
         A starting node to use when computing the basis.
+
+    T : NetworkX graph, optional
+        When the graph ``G`` is a multigraph a A spanning tree is used to extract
+        all the cycles defined by multiple edges between nodes. This is done by
+        calling the function :func:`chords`, which accepts a precomputed tree.
 
     Returns
     -------
@@ -88,7 +93,7 @@ def cycle_basis(G, root=None):
     cycles = []
     # Add all cycles due to multiple edges between nodes.
     if G.is_multigraph():
-        C, T = chords(G, output_tree=True)
+        C, T = chords(G, T=T, output_tree=True)
         cycles = [list(e) for e in C.edges_iter()
                   if T.has_edge(*e) or T.has_edge(*e[::-1])]
         # Make G a graph so that the original algorithm works.
@@ -144,7 +149,7 @@ def cycle_basis_matrix(G, T=None):
     G : NetworkX Graph
         An instance of :class:`networkx.Graph` or :class:`networkx.MultiGraph`.
 
-    T : NetworkX graph
+    T : NetworkX graph, optional
         A spanning tree for the graph ``G``. If this argument is not ``None``,
         the cycle basis whose matrix will be returned will be the set of
         `fundamental cycles`_ with respect to the tree ``T``. If this is not specified, an
