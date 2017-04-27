@@ -8,6 +8,7 @@ Unit tests for WROM algorithm generator in generators/nonisomorphic_trees.py
 """
 from nose.tools import *
 from networkx import *
+from networkx.testing import *
 
 
 class TestGeneratorNonIsomorphicTrees():
@@ -44,6 +45,15 @@ class TestGeneratorNonIsomorphicTrees():
 
     def test_nonisomorphic_trees(self):
         f = lambda x: list(nx.nonisomorphic_trees(x))
-        assert_equal(sorted(f(3)[0].edges()), [(0, 1), (0, 2)])
-        assert_equal(sorted(f(4)[0].edges()), [(0, 1), (0, 3), (1, 2)])
-        assert_equal(sorted(f(4)[1].edges()), [(0, 1), (0, 2), (0, 3)])
+        assert_edges_equal(f(3)[0].edges(), [(0, 1), (0, 2)])
+        assert_edges_equal(f(4)[0].edges(), [(0, 1), (0, 3), (1, 2)])
+        assert_edges_equal(f(4)[1].edges(), [(0, 1), (0, 2), (0, 3)])
+
+    def test_nonisomorphic_trees_matrix(self):
+        trees_2 = [[[0, 1], [1, 0]]]
+        assert_equal(list(nx.nonisomorphic_trees(2, create="matrix")), trees_2)
+        trees_3 = [[[0, 1, 1], [1, 0, 0], [1, 0, 0]]]
+        assert_equal(list(nx.nonisomorphic_trees(3, create="matrix")), trees_3)
+        trees_4 = [[[0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 0], [1, 0, 0, 0]],
+                   [[0, 1, 1, 1], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0]]]
+        assert_equal(list(nx.nonisomorphic_trees(4, create="matrix")), trees_4)
